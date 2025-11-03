@@ -1,0 +1,50 @@
+local items = require('main.items')
+local R = require('ramda.ramda')
+
+function init(self)
+	self.hp = 100
+	self.item = 1
+	self.props = { 1, 2, 5 }
+	self.rarity = 2
+	self.prefix = 4
+	self.targe = '/astronaut'
+end
+
+local function get_props_text(self)
+	local props = {}
+	for i = 1, #self.props do
+		table.insert(props,
+			items.props[self.props[i]] ..
+			': ' ..
+			items.propsValues[self.props[i]][self.item] .. '(' ..
+			items.propsValues[self.props[i]][self.item] + items.prefixPropsValues[self.props[i]][self.prefix] .. ')')
+	end
+	return table.concat(props, '\n')
+end
+
+function update(self, dt)
+	label.set_text('#hp', 'HP: ' .. self.hp)
+	label.set_text('#item',
+		(self.prefix and items.prefix[self.prefix] or '') ..
+		' ' ..
+		(self.item and items.item[self.item]) ..
+		' [' .. (self.rarity and items.rarity[self.rarity] or '-') .. ' ' .. self.rarity .. ']')
+	label.set_text('#props', get_props_text(self))
+	label.set_text('#points', 'Очки: ' .. items.calcPoints(self))
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash('new_game') then
+		self.hp = 100
+		self.props = { 1 }
+		self.item = 1
+	elseif message_id == hash('hit') then
+		self.hp = self.hp - message.damage
+	elseif message_id == hash('get_reward') then
+		if message.type == 'props' then
+			table.insert(self.props, message.value)
+		else
+			self[message.type] = message.value
+		end
+	end
+end

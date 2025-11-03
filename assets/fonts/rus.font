@@ -1,0 +1,5 @@
+font: "/assets/fonts/DigitalPixelV124-Regular.otf"
+material: "/builtins/fonts/font.material"
+size: 15
+all_chars: true
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\320\260\320\261\320\262^_`abcdefghijklmnopqrstuvwxyz{|}~"

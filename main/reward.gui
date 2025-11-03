@@ -1,0 +1,147 @@
+script: "/main/reward.gui_script"
+fonts {
+  name: "rus"
+  font: "/assets/fonts/rus.font"
+}
+textures {
+  name: "bricks"
+  texture: "/assets/bricks.atlas"
+}
+nodes {
+  position {
+    x: 400.0
+    y: 194.0
+  }
+  size {
+    x: 159.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+  }
+  type: TYPE_BOX
+  id: "reward_1"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 1.5
+  }
+  type: TYPE_BOX
+  texture: "bricks/button"
+  id: "reward_1_bg"
+  parent: "reward_1"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Reward 1"
+  font: "rus"
+  id: "reward_1_text"
+  parent: "reward_1"
+}
+nodes {
+  position {
+    x: 600.0
+    y: 194.0
+  }
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+  }
+  type: TYPE_BOX
+  id: "reward_2"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 1.5
+  }
+  type: TYPE_BOX
+  texture: "bricks/button"
+  id: "reward_2_bg"
+  parent: "reward_2"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Reward 1"
+  font: "rus"
+  id: "reward_2_text"
+  parent: "reward_2"
+}
+nodes {
+  position {
+    x: 800.0
+    y: 194.0
+  }
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+  }
+  type: TYPE_BOX
+  id: "reward_3"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    x: 1.5
+  }
+  type: TYPE_BOX
+  texture: "bricks/button"
+  id: "reward_3_bg"
+  parent: "reward_3"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 150.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Reward 3"
+  font: "rus"
+  id: "reward_3_text"
+  parent: "reward_3"
+}
+nodes {
+  position {
+    x: 609.0
+    y: 293.0
+  }
+  scale {
+    x: 2.277941
+    y: 1.63907
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\320\235\320\220\320\223\320\240\320\220\320\224\320\220"
+  font: "rus"
+  id: "reward_title"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

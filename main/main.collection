@@ -1,0 +1,44 @@
+name: "main"
+instances {
+  id: "astronaut"
+  prototype: "/main/astronaut.go"
+  position {
+    x: 404.0
+    y: 387.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/main/astronaut.go"
+  position {
+    x: 794.0
+    y: 389.0
+    z: 1.0
+  }
+}
+instances {
+  id: "game"
+  prototype: "/main/game.go"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  data: "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/main/level.tilemap\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "guis"
+  data: "components {\n"
+  "  id: \"main\"\n"
+  "  component: \"/main/main.gui\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"reward\"\n"
+  "  component: \"/main/reward.gui\"\n"
+  "}\n"
+  ""
+}

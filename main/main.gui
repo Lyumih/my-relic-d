@@ -1,0 +1,85 @@
+script: "/main/main.gui_script"
+fonts {
+  name: "rus"
+  font: "/assets/fonts/rus.font"
+}
+textures {
+  name: "bricks"
+  texture: "/assets/bricks.atlas"
+}
+nodes {
+  position {
+    x: 658.0
+    y: 579.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+  }
+  type: TYPE_BOX
+  id: "battle"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "bricks/button"
+  id: "battle_bg"
+  parent: "battle"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\320\221\320\270\321\202\320\262\320\260"
+  font: "rus"
+  id: "battle_text"
+  parent: "battle"
+}
+nodes {
+  position {
+    x: 1098.0
+    y: 651.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.102
+    z: 0.502
+  }
+  type: TYPE_BOX
+  id: "new_game"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "bricks/button"
+  id: "new_script_bg"
+  parent: "new_game"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\320\227\320\260\320\275\320\276\320\262\320\276"
+  font: "rus"
+  id: "new_game_text"
+  parent: "new_game"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
