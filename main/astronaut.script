@@ -8,7 +8,7 @@ function init(self)
 	self.qualityProps = { 3, 0, -3 }
 	self.rarity = 2
 	self.prefix = 4
-	self.target = '/astronaut'
+	self.target = 'astronaut'
 	msg.post('.', 'update_gui')
 end
 
@@ -38,6 +38,9 @@ end
 
 function on_message(self, message_id, message, sender)
 	update_gui(self)
+	if message_id == hash('set_target') then
+		self.target = message.target
+	end
 	if message_id == hash('new_game') then
 		self.hp = 100
 		self.qualityProps = { 0 }
@@ -45,8 +48,14 @@ function on_message(self, message_id, message, sender)
 		self.item = 1
 		self.prefix = 1
 		self.rarity = 1
-	elseif message_id == hash('hit') then
+	elseif message_id == hash('take_hit') then
+		print('take_hit', message.damage, sender)
 		self.hp = self.hp - message.damage
+	elseif message_id == hash('hit') then
+		print('hit', sender)
+		-- Сделать нормальную систему боя
+		msg.post(self.target, 'take_hit', { damage = items.calcPoints(self) })
+		-- self.hp = self.hp - message.damage
 	elseif message_id == hash('get_reward') then
 		if message.type == 'props' then
 			if message.type == 'props' then
