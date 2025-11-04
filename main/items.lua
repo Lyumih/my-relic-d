@@ -15,6 +15,14 @@ M.item = {
 	"Пушка"
 }
 
+-- Локализация типов данных
+M.typeNames = {
+	props = 'Влияние',
+	item = 'Предмет',
+	rarity = 'Редкость',
+	prefix = 'Префикс'
+}
+
 -- Значения предмета на предметов. Меч ~ Катана = 4. Своё значение можно узнать, в идентификаторе таблицы нажав на себя.
 
 -- Имена свойств (влияний)
@@ -97,21 +105,23 @@ M.getPropPrefixValue = function(self, propIndex)
 	return M.propsValues[self.props[propIndex]][self.item] + M.prefixPropsValues[self.props[propIndex]][self.prefix]
 end
 
---
+-- не используется?
 M.calcPropsValues = function(self)
 	local propsValues = 0
 	for i = 1, #self.props do
-		propsValues = propsValues + M.propsValues[self.props[i]][self.item]
+		propsValues = propsValues + M.propsValues[self.props[i]][self.item] +
+			(self.qualityProps and self.qualityProps[i] or 0)
 	end
 	return propsValues
 end
 
--- Возвращает суммарное значение свойств в пересчёте на префикс
+-- Возвращает суммарное значение свойств в пересчёте на префикс и качество свойств
 M.calcPropsPrefixValues = function(self)
 	local propsValues = 0
 	for i = 1, #self.props do
+		local qualityProps = self.qualityProps and self.qualityProps[i]
 		propsValues = propsValues + M.propsValues[self.props[i]][self.item] +
-			M.prefixPropsValues[self.props[i]][self.prefix]
+			M.prefixPropsValues[self.props[i]][self.prefix] + qualityProps
 	end
 	return propsValues
 end

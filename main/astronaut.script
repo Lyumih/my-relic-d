@@ -5,9 +5,11 @@ function init(self)
 	self.hp = 100
 	self.item = 1
 	self.props = { 1, 2, 5 }
+	self.qualityProps = { 3, 0, -3 }
 	self.rarity = 2
 	self.prefix = 4
-	self.targe = '/astronaut'
+	self.target = '/astronaut'
+	msg.post('.', 'update_gui')
 end
 
 local function get_props_text(self)
@@ -17,12 +19,13 @@ local function get_props_text(self)
 			items.props[self.props[i]] ..
 			': ' ..
 			items.propsValues[self.props[i]][self.item] .. '(' ..
-			items.propsValues[self.props[i]][self.item] + items.prefixPropsValues[self.props[i]][self.prefix] .. ')')
+			items.getPropPrefixValue(self, i) ..
+			')' .. (self.qualityProps and self.qualityProps[i] or 'no qual'))
 	end
 	return table.concat(props, '\n')
 end
 
-function update(self, dt)
+function update_gui(self)
 	label.set_text('#hp', 'HP: ' .. self.hp)
 	label.set_text('#item',
 		(self.prefix and items.prefix[self.prefix] or '') ..
@@ -34,8 +37,10 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	update_gui(self)
 	if message_id == hash('new_game') then
 		self.hp = 100
+		self.qualityProps = { 0 }
 		self.props = { 1 }
 		self.item = 1
 		self.prefix = 1
@@ -44,6 +49,9 @@ function on_message(self, message_id, message, sender)
 		self.hp = self.hp - message.damage
 	elseif message_id == hash('get_reward') then
 		if message.type == 'props' then
+			if message.type == 'props' then
+				table.insert(self.qualityProps, message.qualityProps)
+			end
 			table.insert(self.props, message.value)
 		else
 			self[message.type] = message.value

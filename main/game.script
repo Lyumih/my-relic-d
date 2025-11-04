@@ -15,12 +15,17 @@ end
 
 -- Создаёт набор наград	
 local function generate_reward_data()
-	-- local types = { 'item', 'rarity', 'prop' , 'prefix' }
+	-- local types = { 'props' }
 	local types = { 'item', 'rarity', 'props', 'prefix' }
 	local current_type = types[math.random(#types)]
 	return {
 		type = current_type,
-		rewards = { math.random(#items.rarity), math.random(#items.rarity), math.random(#items.rarity) }
+		rewards = {
+			math.random(#items[current_type]),
+			math.random(#items[current_type]),
+			math.random(#items[current_type]),
+		},
+		qualityProps = { math.random(-3, 3), math.random(-3, 3), math.random(-3, 3) }
 	}
 end
 
@@ -28,6 +33,13 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash('generate_reward') then
 		msg.post('guis#reward', 'set_reward', generate_reward_data())
 		msg.post('guis#reward', 'show_reward')
+		local rewardEnemy = generate_reward_data()
+		msg.post('/enemy', "get_reward",
+			{
+				type = rewardEnemy.type,
+				value = rewardEnemy.rewards[1],
+				qualityProps = rewardEnemy.qualityProps[1]
+			})
 	elseif message_id == hash('new_game') then
 		msg.post('astronaut', 'new_game')
 		msg.post('enemy', 'new_game')
