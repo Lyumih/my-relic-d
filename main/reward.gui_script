@@ -17,7 +17,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash('show_reward') then
 		msg.post("#", 'enable')
 		self.active = true
-		print('show_reward')
 		for i = 1, #self.rewards do
 			local reward = gui.get_node('reward_' .. i .. '_text')
 			gui.set_text(reward, self.type .. '\n' .. items[self.type][self.rewards[i]] .. self.rewards[i])

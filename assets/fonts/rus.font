@@ -1,4 +1,4 @@
-font: "/assets/fonts/DigitalPixelV124-Regular.otf"
+font: "/assets/fonts/pixel.ttf"
 material: "/builtins/fonts/font.material"
 size: 15
 all_chars: true

@@ -38,6 +38,8 @@ function on_message(self, message_id, message, sender)
 		self.hp = 100
 		self.props = { 1 }
 		self.item = 1
+		self.prefix = 1
+		self.rarity = 1
 	elseif message_id == hash('hit') then
 		self.hp = self.hp - message.damage
 	elseif message_id == hash('get_reward') then

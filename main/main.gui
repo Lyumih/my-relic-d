@@ -9,8 +9,8 @@ textures {
 }
 nodes {
   position {
-    x: 658.0
-    y: 579.0
+    x: 1054.0
+    y: 194.0
   }
   size {
     x: 100.0
@@ -45,7 +45,7 @@ nodes {
 }
 nodes {
   position {
-    x: 1098.0
+    x: 1054.0
     y: 651.0
   }
   size {
@@ -80,6 +80,21 @@ nodes {
   font: "rus"
   id: "new_game_text"
   parent: "new_game"
+}
+nodes {
+  position {
+    x: 557.0
+    y: 654.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\320\245\320\276\320\264: 1"
+  font: "rus"
+  id: "turn"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

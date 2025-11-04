@@ -8,6 +8,11 @@ function init(self)
 	msg.post('guis#reward', 'show_reward')
 end
 
+function update_turn(self, turn)
+	self.turn = turn
+	msg.post('guis#main', 'new_turn', { turn = self.turn })
+end
+
 -- Создаёт набор наград	
 local function generate_reward_data()
 	-- local types = { 'item', 'rarity', 'prop' , 'prefix' }
@@ -27,9 +32,11 @@ function on_message(self, message_id, message, sender)
 		msg.post('astronaut', 'new_game')
 		msg.post('enemy', 'new_game')
 		msg.post('#', 'generate_reward')
+		update_turn(self, 1)
 	elseif message_id == hash('battle') then
-		print('battle')
 		msg.post('astronaut', 'hit', { damage = 4 })
 		msg.post('enemy', 'hit', { damage = 2 })
+		msg.post('#', 'generate_reward')
+		update_turn(self, self.turn + 1)
 	end
 end
