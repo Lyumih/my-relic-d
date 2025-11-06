@@ -40,10 +40,10 @@ function on_input(self, action_id, action)
 					{
 						value = self.rewards[n],
 						type = self.type,
-						qualityProps = type == 'props' and self.qualityProps[n] or 0
+						qualityProps = (self.type == 'props' and self.qualityProps[n] or 0)
 					})
+				msg.post('game', 'battle')
 			end
 		end
-		msg.post('game', 'battle')
 	end
 end

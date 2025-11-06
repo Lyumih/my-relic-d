@@ -1,5 +1,4 @@
 local items = require('main.items')
-local R = require('ramda.ramda')
 
 function init(self)
 	self.hp = 100
@@ -9,7 +8,7 @@ function init(self)
 	self.rarity = 2
 	self.prefix = 4
 	self.target = 'astronaut'
-	msg.post('.', 'update_gui')
+	update_gui(self)
 end
 
 local function get_props_text(self)
@@ -18,9 +17,9 @@ local function get_props_text(self)
 		table.insert(props,
 			items.props[self.props[i]] ..
 			': ' ..
-			items.propsValues[self.props[i]][self.item] .. '(' ..
+			items.propsValues[self.props[i]][self.item] .. ' (' ..
 			items.getPropPrefixValue(self, i) ..
-			')' .. (self.qualityProps and self.qualityProps[i] or 'no qual'))
+			') ' .. (self.qualityProps and self.qualityProps[i] or 'no qual'))
 	end
 	return table.concat(props, '\n')
 end
@@ -37,7 +36,6 @@ function update_gui(self)
 end
 
 function on_message(self, message_id, message, sender)
-	update_gui(self)
 	if message_id == hash('set_target') then
 		self.target = message.target
 	end
@@ -48,22 +46,29 @@ function on_message(self, message_id, message, sender)
 		self.item = 1
 		self.prefix = 1
 		self.rarity = 1
+		update_gui(self)
 	elseif message_id == hash('take_hit') then
-		print('take_hit', message.damage, sender)
-		self.hp = self.hp - message.damage
+		local damageDiff = message.damage - items.calcPoints(self)
+		if damageDiff > 0 then
+			print('damageDiff > 0', damageDiff)
+			self.hp = self.hp - damageDiff
+		end
+		if (self.hp <= 0) then
+			msg.post('game', 'end_game')
+		end
+		-- print('take_hit', self.target, message.from, sender, self.hp, damageDiff, message.damage, items.calcPoints(self))
+		update_gui(self)
 	elseif message_id == hash('hit') then
-		print('hit', sender)
-		-- Сделать нормальную систему боя
-		msg.post(self.target, 'take_hit', { damage = items.calcPoints(self) })
-		-- self.hp = self.hp - message.damage
+		-- print('hit', self.target, sender, items.calcPoints(self))
+		-- msg.post(self.target, 'take_hit', { damage = items.calcPoints(self), from = self.target })
 	elseif message_id == hash('get_reward') then
 		if message.type == 'props' then
-			if message.type == 'props' then
-				table.insert(self.qualityProps, message.qualityProps)
-			end
+			table.insert(self.qualityProps, message.qualityProps)
 			table.insert(self.props, message.value)
 		else
 			self[message.type] = message.value
 		end
+		print('get_reward', message.type, message.value, message.qualityProps, #self.qualityProps, #self.props)
+		update_gui(self)
 	end
 end

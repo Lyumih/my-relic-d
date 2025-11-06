@@ -2,9 +2,9 @@
 local items = require('main.items')
 
 function init(self)
-	self.turn = 1         -- ход
+	self.turn = 1      -- ход
 	self.finished = false -- Конец игры
-	msg.post('/enemy', 'set_target', { target = 'enemy' })
+	msg.post('/astronaut', 'set_target', { target = 'enemy' })
 	msg.post('guis#reward', 'set_reward', { type = 'rarity', rewards = { 2, 4, 5 } })
 	msg.post('guis#reward', 'show_reward')
 end
@@ -34,6 +34,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash('generate_reward') then
 		msg.post('guis#reward', 'set_reward', generate_reward_data())
 		msg.post('guis#reward', 'show_reward')
+	elseif message_id == hash('get_enemy_reward') then
 		local rewardEnemy = generate_reward_data()
 		msg.post('/enemy', "get_reward",
 			{
@@ -42,14 +43,24 @@ function on_message(self, message_id, message, sender)
 				qualityProps = rewardEnemy.qualityProps[1]
 			})
 	elseif message_id == hash('new_game') then
+		self.finished = false
 		msg.post('astronaut', 'new_game')
 		msg.post('enemy', 'new_game')
 		msg.post('#', 'generate_reward')
+		-- msg.post('#', 'generate_reward')
 		update_turn(self, 1)
+	elseif message_id == hash('end_game') then
+		if self.finished then
+			msg.post('#', 'new_game')
+		else
+			self.finished = true
+		end
+		print('END GAME')
 	elseif message_id == hash('battle') then
 		msg.post('astronaut', 'hit')
 		msg.post('enemy', 'hit')
 		msg.post('#', 'generate_reward')
+		msg.post('#', 'get_enemy_reward')
 		update_turn(self, self.turn + 1)
 	end
 end
