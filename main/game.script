@@ -47,7 +47,6 @@ function on_message(self, message_id, message, sender)
 		msg.post('astronaut', 'new_game')
 		msg.post('enemy', 'new_game')
 		msg.post('#', 'generate_reward')
-		-- msg.post('#', 'generate_reward')
 		update_turn(self, 1)
 	elseif message_id == hash('end_game') then
 		if self.finished then

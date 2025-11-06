@@ -60,7 +60,7 @@ function on_message(self, message_id, message, sender)
 		update_gui(self)
 	elseif message_id == hash('hit') then
 		-- print('hit', self.target, sender, items.calcPoints(self))
-		-- msg.post(self.target, 'take_hit', { damage = items.calcPoints(self), from = self.target })
+		msg.post(self.target, 'take_hit', { damage = items.calcPoints(self), from = self.target })
 	elseif message_id == hash('get_reward') then
 		if message.type == 'props' then
 			table.insert(self.qualityProps, message.qualityProps)
