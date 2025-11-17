@@ -1,4 +1,24 @@
+local druid = require("druid.druid")
 local items = require 'main.items'
+
+local function refresh_texts(self)
+	for i = 1, #self.rewards do
+		self['text_reward_' .. i]:set_text(items.typeNames[self.type] ..
+			'\n' .. items[self.type][self.rewards[i]] .. self.rewards[i]
+			.. (self.type == 'props' and '\n(' .. (self.qualityProps and self.qualityProps[i] or '-') .. ')' or ''))
+	end
+end
+
+local function on_reward(self, params)
+	print('on reward' .. params.index)
+	msg.post('/astronaut', "get_reward",
+		{
+			value = self.rewards[params.index],
+			type = self.type,
+			qualityProps = (self.type == 'props' and self.qualityProps[params.index] or 0)
+		})
+	msg.post('game', 'battle')
+end
 
 function init(self)
 	msg.post('.', 'acquire_input_focus')
@@ -8,9 +28,16 @@ function init(self)
 	self.type = 'rarity'
 	self.rewards = { 2, 4, 3 }
 	self.qualityProps = { 3, 0, -3 }
+
+	self.druid = druid.new(self)
+	for i = 1, #self.rewards do
+		self.druid:new_button('button_reward_' .. i .. '/root', on_reward, { index = i })
+		self['text_reward_' .. i] = self.druid:new_text('button_reward_' .. i .. '/text')
+	end
 end
 
 function on_message(self, message_id, message, sender)
+	self.druid:on_message(message_id, message, sender)
 	if message_id == hash('set_reward') then
 		self.type = message.type
 		self.rewards = message.rewards
@@ -19,12 +46,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash('show_reward') then
 		msg.post("#", 'enable')
 		self.active = true
-		for i = 1, #self.rewards do
-			local reward = gui.get_node('reward_' .. i .. '_text')
-			gui.set_text(reward,
-				items.typeNames[self.type] .. '\n' .. items[self.type][self.rewards[i]] .. self.rewards[i]
-				.. (self.type == 'props' and '\n(' .. (self.qualityProps and self.qualityProps[i] or '-') .. ')' or ''))
-		end
+		refresh_texts(self)
 	elseif message_id == hash('hide_reward') then
 		msg.post('#', 'disable')
 		self.active = false
@@ -32,18 +54,13 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash('touch') and action.pressed and self.active then
-		for n = 1, 3 do
-			local node = gui.get_node("reward_" .. n)
-			if gui.pick_node(node, action.x, action.y) then
-				msg.post('/astronaut', "get_reward",
-					{
-						value = self.rewards[n],
-						type = self.type,
-						qualityProps = (self.type == 'props' and self.qualityProps[n] or 0)
-					})
-				msg.post('game', 'battle')
-			end
-		end
-	end
+	return self.druid:on_input(action_id, action)
+end
+
+function final(self)
+	self.druid:final()
+end
+
+function update(self, dt)
+	self.druid:update(dt)
 end

@@ -9,80 +9,6 @@ textures {
 }
 nodes {
   position {
-    x: 1054.0
-    y: 194.0
-  }
-  size {
-    x: 100.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-  }
-  type: TYPE_BOX
-  id: "battle"
-  inherit_alpha: true
-  alpha: 0.0
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  type: TYPE_BOX
-  texture: "bricks/button"
-  id: "battle_bg"
-  parent: "battle"
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 100.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "\320\221\320\270\321\202\320\262\320\260"
-  font: "rus"
-  id: "battle_text"
-  parent: "battle"
-}
-nodes {
-  position {
-    x: 1054.0
-    y: 651.0
-  }
-  size {
-    x: 100.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.102
-    z: 0.502
-  }
-  type: TYPE_BOX
-  id: "new_game"
-  inherit_alpha: true
-  alpha: 0.0
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  type: TYPE_BOX
-  texture: "bricks/button"
-  id: "new_script_bg"
-  parent: "new_game"
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 100.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "\320\227\320\260\320\275\320\276\320\262\320\276"
-  font: "rus"
-  id: "new_game_text"
-  parent: "new_game"
-}
-nodes {
-  position {
     x: 557.0
     y: 654.0
   }
@@ -95,6 +21,70 @@ nodes {
   font: "rus"
   id: "turn"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1096.0
+    y: 651.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_new_game"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_new_game/root"
+  parent: "button_new_game"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_new_game/button"
+  parent: "button_new_game/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "\320\227\320\260\320\275\320\276\320\262\320\276"
+  id: "button_new_game/text"
+  parent: "button_new_game/button"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 1099.0
+    y: 150.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_battle"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_battle/root"
+  parent: "button_battle"
+  template_node_child: true
+}
+nodes {
+  color {
+    y: 0.0
+  }
+  type: TYPE_BOX
+  id: "button_battle/button"
+  parent: "button_battle/root"
+  overridden_fields: 5
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "\320\221\320\270\321\202\320\262\320\260"
+  id: "button_battle/text"
+  parent: "button_battle/button"
+  overridden_fields: 8
+  template_node_child: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
