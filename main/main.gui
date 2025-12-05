@@ -24,7 +24,7 @@ nodes {
 }
 nodes {
   position {
-    x: 1096.0
+    x: 1105.0
     y: 651.0
   }
   type: TYPE_TEMPLATE
@@ -83,6 +83,42 @@ nodes {
   text: "\320\221\320\270\321\202\320\262\320\260"
   id: "button_battle/text"
   parent: "button_battle/button"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 204.0
+    y: 649.0
+  }
+  type: TYPE_TEMPLATE
+  id: "button_menu"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button_menu/root"
+  parent: "button_menu"
+  template_node_child: true
+}
+nodes {
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "button_menu/button"
+  parent: "button_menu/root"
+  overridden_fields: 5
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "\320\234\320\265\320\275\321\216"
+  id: "button_menu/text"
+  parent: "button_menu/button"
   overridden_fields: 8
   template_node_child: true
 }

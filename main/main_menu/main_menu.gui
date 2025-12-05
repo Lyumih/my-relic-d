@@ -1,0 +1,237 @@
+script: "/main/main_menu/main_menu.gui_script"
+fonts {
+  name: "rus"
+  font: "/assets/fonts/rus.font"
+}
+nodes {
+  position {
+    x: 640.0
+    y: 384.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  size {
+    x: 1280.0
+    y: 768.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  id: "shadow"
+  adjust_mode: ADJUST_MODE_STRETCH
+  parent: "root"
+  inherit_alpha: true
+  alpha: 0.38
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "window"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    y: -76.0
+  }
+  type: TYPE_TEMPLATE
+  id: "help"
+  parent: "window"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "help/root"
+  parent: "help"
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "help/button"
+  parent: "help/root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  text: "\320\241\320\277\321\200\320\260\320\262\320\272\320\260"
+  id: "help/text"
+  parent: "help/button"
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    y: 50.0
+  }
+  type: TYPE_TEMPLATE
+  id: "continue"
+  parent: "window"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  size {
+    x: 250.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "continue/root"
+  parent: "continue"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "continue/button"
+  parent: "continue/root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 250.0
+    y: 75.0
+  }
+  type: TYPE_TEXT
+  text: "\320\237\321\200\320\276\320\264\320\276\320\273\320\266\320\270\321\202\321\214"
+  id: "continue/text"
+  parent: "continue/button"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    y: 181.0
+  }
+  type: TYPE_TEMPLATE
+  id: "new_game"
+  parent: "window"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  size {
+    x: 250.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "new_game/root"
+  parent: "new_game"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "new_game/button"
+  parent: "new_game/root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 250.0
+    y: 75.0
+  }
+  type: TYPE_TEXT
+  text: "\320\235\320\276\320\262\320\260\321\217 \320\270\320\263\321\200\320\260"
+  id: "new_game/text"
+  parent: "new_game/button"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    y: -300.0
+  }
+  type: TYPE_TEMPLATE
+  id: "exit"
+  parent: "window"
+  inherit_alpha: true
+  template: "/widget/button/button.gui"
+}
+nodes {
+  size {
+    x: 250.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "exit/root"
+  parent: "exit"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "exit/button"
+  parent: "exit/root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 250.0
+    y: 75.0
+  }
+  type: TYPE_TEXT
+  text: "\320\222\321\213\320\271\321\202\320\270"
+  id: "exit/text"
+  parent: "exit/button"
+  overridden_fields: 4
+  overridden_fields: 8
+  template_node_child: true
+}
+nodes {
+  position {
+    y: 316.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "\320\234\320\276\321\217 \320\240\320\265\320\273\320\270\320\272\320\262\320\270\321\217"
+  font: "rus"
+  id: "title"
+  parent: "window"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

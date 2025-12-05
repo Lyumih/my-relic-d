@@ -1,4 +1,5 @@
 local druid = require("druid.druid")
+local monarch = require('monarch.monarch')
 
 local function on_new_game()
 	msg.post('/game', 'new_game')
@@ -8,10 +9,15 @@ local function on_battle()
 	msg.post('/game', 'battle')
 end
 
+local function on_menu()
+	monarch.show('main_menu')
+end
+
 function init(self)
 	self.druid = druid.new(self)
 	self.druid:new_button('button_new_game/root', on_new_game)
 	self.druid:new_button('button_battle/root', on_battle)
+	self.druid:new_button('button_menu/root', on_menu)
 end
 
 function on_input(self, action_id, action)

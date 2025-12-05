@@ -1,0 +1,10 @@
+name: "unit"
+scale_along_z: 0
+embedded_instances {
+  id: "go"
+  data: "components {\n"
+  "  id: \"unit\"\n"
+  "  component: \"/entities/unit/unit.gui\"\n"
+  "}\n"
+  ""
+}

@@ -1,0 +1,10 @@
+name: "m"
+scale_along_z: 0
+embedded_instances {
+  id: "monarch"
+  data: "components {\n"
+  "  id: \"game_help\"\n"
+  "  component: \"/main/game_help/game_help.gui\"\n"
+  "}\n"
+  ""
+}
